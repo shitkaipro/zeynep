@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div id="confetti-container"></div>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fas fa-birthday-cake"></i> 20 Yaş!</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/message"><i class="fas fa-envelope"></i> Mesaj</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/gallery"><i class="fas fa-images"></i> Galeri</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="message-section py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="message-card">
+                        <div class="message-header text-center mb-5">
+                            <h1 class="display-4 fw-bold text-gradient mb-3">
+                                Sevgili Ablam 💝
+                            </h1>
+                            <div class="message-date">
+                                <span class="badge bg-pink text-white fs-6">
+                                    <i class="fas fa-calendar-heart"></i>
+                                    20. Yaş Günün Kutlu Olsun!
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="message-content">
+                            <div class="message-text">
+                                <p class="lead mb-4">
+                                    Bugün hayatının en özel günlerinden birini daha kutluyoruz. 
+                                    20 yıl önce dünyaya geldiğinde ailemize ne büyük bir mutluluk katmıştın, 
+                                    bugün de aynı mutluluğu yaşıyoruz.
+                                </p>
+                                
+                                <p class="mb-4">
+                                    Bu 20 yıl içinde ne kadar çok büyüdüğünü, ne kadar çok değiştiğini ve 
+                                    ne kadar çok başardığını görmek bizim için en büyük gurur kaynağı. 
+                                    Sadece bir abla değil, aynı zamanda bir arkadaş, bir rehber ve bir ilham kaynağı oldun.
+                                </p>
+
+                                <div class="highlight-box p-4 my-5">
+                                    <h3 class="text-center mb-3">
+                                        <i class="fas fa-star text-warning"></i>
+                                        20 Yaşında Neler Var?
+                                        <i class="fas fa-star text-warning"></i>
+                                    </h3>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3">
+                                            <i class="fas fa-heart text-danger me-2"></i>
+                                            <strong>Hayaller:</strong> Gerçekleşmeye hazır bekleyen nice hayaller...
+                                        </li>
+                                        <li class="mb-3">
+                                            <i class="fas fa-rocket text-info me-2"></i>
+                                            <strong>Hedefler:</strong> Ulaşılmaya hazır nice hedefler...
+                                        </li>
+                                        <li class="mb-3">
+                                            <i class="fas fa-rainbow text-success me-2"></i>
+                                            <strong>Renkler:</strong> Hayatını renklendirecek yeni anılar...
+                                        </li>
+                                        <li class="mb-3">
+                                            <i class="fas fa-music text-warning me-2"></i>
+                                            <strong>Müzik:</strong> Her nota senin için çalacak...
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <p class="mb-4">
+                                    20 yaş, hayatının en güzel başlangıçlarından biri. Bu yaşta önünde 
+                                    sonsuz imkanlar var. Unutma, senin potansiyelin sınırsız ve sen 
+                                    neye inanırsan onu başarabilirsin.
+                                </p>
+
+                                <div class="poem-box bg-light p-4 rounded-3 my-5">
+                                    <h4 class="text-center mb-4 text-purple">
+                                        <i class="fas fa-feather-alt"></i>
+                                        Sana Özel
+                                    </h4>
+                                    <blockquote class="blockquote text-center">
+                                        <p class="mb-3 fst-italic">
+                                            "Yirmi baharın güzelliği,<br>
+                                            Yirmi kışın sabrı seninle,<br>
+                                            Yirmi yılın her anı<br>
+                                            Kalbimizde bir iz bıraktı."
+                                        </p>
+                                        <footer class="blockquote-footer">
+                                            Seni Seven Kardeşinden
+                                        </footer>
+                                    </blockquote>
+                                </div>
+
+                                <p class="mb-4">
+                                    Bu özel günde sana sadece en iyilerini diliyorum. Hayatının her alanında 
+                                    başarılar dolu, mutluluklar dolu ve sağlık dolu bir yaşam geçirmeni temenni ediyorum.
+                                </p>
+
+                                <div class="wishes-grid">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="wish-item">
+                                                <i class="fas fa-graduation-cap text-primary"></i>
+                                                <span>Eğitimde başarılar</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="wish-item">
+                                                <i class="fas fa-briefcase text-success"></i>
+                                                <span>Kariyerde zirveler</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="wish-item">
+                                                <i class="fas fa-heart text-danger"></i>
+                                                <span>Aşkta mutluluklar</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="wish-item">
+                                                <i class="fas fa-smile text-warning"></i>
+                                                <span>Hayatta güzellikler</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class="text-center mt-5 mb-4">
+                                    <strong class="text-gradient fs-4">
+                                        Doğum günün kutlu olsun, canım ablam! 🎉🎂💕
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="message-footer text-center mt-5">
+                            <div class="signature">
+                                <h4 class="text-purple mb-3">Seni Seven Kardeşinden</h4>
+                                <div class="heart-animation">
+                                    <i class="fas fa-heart text-danger pulse-heart"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons mt-4">
+                                <a href="/" class="btn btn-pink btn-lg me-3">
+                                    <i class="fas fa-home"></i> Ana Sayfaya Dön
+                                </a>
+                                <a href="/gallery" class="btn btn-purple btn-lg">
+                                    <i class="fas fa-images"></i> Anılara Göz At
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer py-4">
+        <div class="container text-center">
+            <p class="mb-0">
+                <i class="fas fa-heart text-danger"></i>
+                20. yaş günün kutlu olsun!
+                <i class="fas fa-heart text-danger"></i>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="/js/animations.js"></script>
+    <script>
+        // Mesaj animasyonları
+        document.addEventListener('DOMContentLoaded', () => {
+            const messageText = document.querySelector('.message-text');
+            if (messageText) {
+                messageText.style.opacity = '0';
+                messageText.style.transform = 'translateY(20px)';
+                messageText.style.transition = 'all 1s ease';
+                
+                setTimeout(() => {
+                    messageText.style.opacity = '1';
+                    messageText.style.transform = 'translateY(0)';
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <style>
+        .gallery-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 240, 255, 0.95) 100%);
+            padding: 100px 0 50px;
+        }
+        
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .gallery-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+            margin-bottom: 20px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .memory-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .memory-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .memory-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .memory-content {
+            padding: 25px;
+        }
+        
+        .memory-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .memory-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .memory-description {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .memory-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .tag {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .timeline-section {
+            background: white;
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 50px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            padding-right: 50%;
+            text-align: right;
+            padding-left: 20px;
+        }
+        
+        .timeline-item:nth-child(even) {
+            padding-left: 50%;
+            text-align: left;
+            padding-right: 20px;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2);
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-year {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-text {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .upload-section {
+            text-align: center;
+            padding: 60px 0;
+            background: white;
+            border-radius: 30px;
+            margin-top: 50px;
+        }
+        
+        .upload-area {
+            border: 3px dashed #ff6b6b;
+            border-radius: 20px;
+            padding: 60px 40px;
+            background: rgba(255, 107, 107, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            background: rgba(255, 107, 107, 0.1);
+            border-color: #feca57;
+        }
+        
+        .upload-icon {
+            font-size: 4rem;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-title { font-size: 2.5rem; }
+            .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
+            .timeline::before { left: 20px; }
+            .timeline-item { padding-left: 60px !important; padding-right: 20px !important; text-align: left !important; }
+            .timeline-dot { left: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="confetti-container"></div>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fas fa-birthday-cake"></i> 20 Yaş!</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/message"><i class="fas fa-envelope"></i> Mesaj</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/gallery"><i class="fas fa-images"></i> Galeri</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-header">
+                <h1 class="gallery-title">
+                    <i class="fas fa-camera-retro"></i>
+                    Anılarımız
+                </h1>
+                <p class="lead text-muted">
+                    20 yıl boyunca biriktirdiğimiz güzel anılar, unutulmaz anlar...
+                </p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="memory-card" onclick="openMemory(1)">
+                    <div class="memory-image">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <div class="memory-content">
+                        <h3 class="memory-title">İlk Adımlar</h3>
+                        <p class="memory-date"><i class="fas fa-calendar"></i> 2004</p>
+                        <p class="memory-description">
+                            Hayatına başladığın o güzel gün, ailemize kattığın mutluluk...
+                        </p>
+                        <div class="memory-tags">
+                            <span class="tag">#İlkYıl</span>
+                            <span class="tag">#Aile</span>
+                            <span class="tag">#Mutluluk</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="memory-card" onclick="openMemory(2)">
+                    <div class="memory-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="memory-content">
+                        <h3 class="memory-title">İlk Okul</h3>
+                        <p class="memory-date"><i class="fas fa-calendar"></i> 2010</p>
+                        <p class="memory-description">
+                            Okula başladığın o heyecanlı gün, yeni arkadaşlar edinmen...
+                        </p>
+                        <div class="memory-tags">
+                            <span class="tag">#Eğitim</span>
+                            <span class="tag">#Arkadaşlık</span>
+                            <span class="tag">#Başarı</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="memory-card" onclick="openMemory(3)">
+                    <div class="memory-image">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="memory-content">
+                        <h3 class="memory-title">Müzikle Tanışma</h3>
+                        <p class="memory-date"><i class="fas fa-calendar"></i> 2015</p>
+                        <p class="memory-description">
+                            Müziğe olan tutkunu keşfettiğin o güzel yıllar...
+                        </p>
+                        <div class="memory-tags">
+                            <span class="tag">#Müzik</span>
+                            <span class="tag">#Sanat</span>
+                            <span class="tag">#Tutku</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="memory-card" onclick="openMemory(4)">
+                    <div class="memory-image">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="memory-content">
+                        <h3 class="memory-title">Arkadaş Grubu</h3>
+                        <p class="memory-date"><i class="fas fa-calendar"></i> 2018</p>
+                        <p class="memory-description">
+                            Hayatının en yakın arkadaşlarıyla geçirdiğin güzel zamanlar...
+                        </p>
+                        <div class="memory-tags">
+                            <span class="tag">#Arkadaşlık</span>
+                            <span class="tag">#Eğlence</span>
+                            <span class="tag">#Gençlik</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="memory-card" onclick="openMemory(5)">
+                    <div class="memory-image">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="memory-content">
+                        <h3 class="memory-title">Başarı Anları</h3>
+                        <p class="memory-date"><i class="fas fa-calendar"></i> 2020</p>
+                        <p class="memory-description">
+                            Çalışkanlığının ve azminin karşılığını aldığın o gurur dolu anlar...
+                        </p>
+                        <div class="memory-tags">
+                            <span class="tag">#Başarı</span>
+                            <span class="tag">#Gurur</span>
+                            <span class="tag">#Azim</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="memory-card" onclick="openMemory(6)">
+                    <div class="memory-image">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="memory-content">
+                        <h3 class="memory-title">Aile Sevgisi</h3>
+                        <p class="memory-date"><i class="fas fa-calendar"></i> 2023</p>
+                        <p class="memory-description">
+                            Ailenle birlikte geçirdiğin her an, birbirinize olan sevgin...
+                        </p>
+                        <div class="memory-tags">
+                            <span class="tag">#Aile</span>
+                            <span class="tag">#Sevgi</span>
+                            <span class="tag">#Birliktelik</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <h2 class="timeline-title">
+                    <i class="fas fa-clock"></i>
+                    20 Yıllık Yolculuk
+                </h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2004</div>
+                            <div class="timeline-text">
+                                Hayatına başladığın yıl, ailemize kattığın mutluluk ve sevgi...
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2010</div>
+                            <div class="timeline-text">
+                                İlk okula başladığın yıl, yeni maceralara atıldığın dönem...
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2016</div>
+                            <div class="timeline-text">
+                                Lise yılların, ergenliğin ve kimlik bulma sürecin...
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2022</div>
+                            <div class="timeline-text">
+                                Üniversiteye başladığın yıl, yeni bir hayat sayfası...
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2024</div>
+                            <div class="timeline-text">
+                                20 yaşında, hayatının en güzel başlangıçlarından biri...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="upload-section">
+                <h2 class="mb-4">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    Anılarını Paylaş
+                </h2>
+                <p class="text-muted mb-4">
+                    Seninle ilgili güzel anılarını, fotoğraflarını veya mesajlarını buraya yükleyebilirsin
+                </p>
+                <div class="upload-area" onclick="handleUpload()">
+                    <div class="upload-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h4>Fotoğraf Yükle</h4>
+                    <p class="text-muted">
+                        Buraya tıkla veya fotoğraflarını sürükle
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="/" class="btn btn-pink btn-lg me-3">
+                    <i class="fas fa-home"></i> Ana Sayfaya Dön
+                </a>
+                <a href="/message" class="btn btn-purple btn-lg">
+                    <i class="fas fa-envelope"></i> Mesajı Oku
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer py-4">
+        <div class="container text-center">
+            <p class="mb-0">
+                <i class="fas fa-heart text-danger"></i>
+                20. yaş günün kutlu olsun!
+                <i class="fas fa-heart text-danger"></i>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="/js/animations.js"></script>
+    <script>
+        function openMemory(id) {
+            // Konfeti başlat
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            
+            // Modal veya detay sayfası açılabilir
+            console.log('Memory ' + id + ' opened');
+        }
+        
+        function handleUpload() {
+            // Fotoğraf yükleme işlemi
+            alert('Fotoğraf yükleme özelliği yakında eklenecek!');
+        }
+        
+        // Galeri animasyonları
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.memory-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

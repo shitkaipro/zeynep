@@ -1,0 +1,434 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffc1e3 0%, #ffd8e4 50%, #ffe5ec 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* BIRTHDAY TITLE */
+.birthday-title {
+    text-align: center;
+    padding: 40px 20px;
+    z-index: 10;
+    position: relative;
+}
+
+.birthday-title h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #c2185b;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    animation: gentle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes gentle-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+/* BIRD ANIMATION */
+.bird-container {
+    position: relative;
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+}
+
+.bird {
+    position: fixed;
+    top: -100px;
+    left: -200px;
+    font-size: 3.5rem;
+    color: white;
+    opacity: 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+}
+
+.bird.fly-in {
+    animation: birdFly 3s ease-out forwards;
+}
+
+@keyframes birdFly {
+    0% {
+        opacity: 0;
+        top: -100px;
+        left: -200px;
+    }
+    70% {
+        opacity: 1;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%) rotate(0deg);
+    }
+    100% {
+        opacity: 1;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%) rotate(0deg);
+    }
+}
+
+/* ENVELOPE CONTAINER */
+.envelope-container {
+    position: fixed;
+    top: -400px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    z-index: 100;
+    cursor: pointer;
+}
+
+.envelope-container.drop {
+    animation: envelopeFall 2s ease-out forwards;
+}
+
+@keyframes envelopeFall {
+    0% {
+        opacity: 0;
+        top: -400px;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* ENVELOPE */
+.envelope {
+    width: 550px;
+    height: 380px;
+    position: relative;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 190px;
+    background: linear-gradient(to bottom, #ffa8c5, #ff8fb3);
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    z-index: 105;
+    transform-origin: 50% 0%;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease 0.8s;
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(-180deg);
+    opacity: 0;
+}
+
+.envelope.open .envelope-body {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.envelope.open .heart-seal {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.envelope-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff9eba, #ffb3ca);
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    z-index: 103;
+}
+
+.heart-seal {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, #e91e63, #f06292);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.6rem;
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+    z-index: 106;
+    animation: heartPulse 2s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.1); }
+}
+
+/* LETTER PAPER */
+.letter-paper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    width: 460px;
+    height: 600px;
+    background: linear-gradient(to bottom, #ffffff, #fffef9);
+    border-radius: 10px;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+    z-index: 104;
+    opacity: 0;
+    transition: all 1s ease;
+    pointer-events: none;
+}
+
+.envelope.open .letter-paper {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.letter-paper.slide-out {
+    transform: translate(-50%, -50%) !important;
+    transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.letter-content {
+    padding: 35px 30px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.letter-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.letter-content::-webkit-scrollbar-track {
+    background: #ffe5ec;
+    border-radius: 10px;
+}
+
+.letter-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #ff6b9d, #ff8fb3);
+    border-radius: 10px;
+}
+
+.personal-message {
+    font-size: 1rem;
+    color: #424242;
+    line-height: 1.9;
+    text-align: left;
+    font-weight: 400;
+    margin: 0;
+}
+
+.personal-message strong {
+    font-weight: 700;
+}
+
+/* HEART CONTAINER */
+#heart-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 22px;
+    animation: floatDown 5s ease-in forwards;
+}
+
+@keyframes floatDown {
+    0% {
+        top: -50px;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        top: 110vh;
+        opacity: 0;
+    }
+}
+
+/* PHOTO BIRDS */
+.photo-birds {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+}
+
+.photo-bird {
+    position: fixed;
+    font-size: 2.8rem;
+    color: white;
+    opacity: 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.photo-bird.fly-in {
+    animation: photoBirdFlight 3s ease-out forwards;
+}
+
+@keyframes photoBirdFlight {
+    0% {
+        opacity: 0;
+        top: -100px;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* PHOTOS */
+.photos-drop-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    pointer-events: none;
+    z-index: 40;
+}
+
+.photo-item {
+    position: fixed;
+    width: 220px;
+    height: 165px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    border: 4px solid white;
+    opacity: 0;
+    transform: scale(0) rotate(180deg);
+    transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.photo-item.show {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* CONFETTI */
+#confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .birthday-title h1 {
+        font-size: 1.8rem;
+    }
+    
+    .bird {
+        font-size: 2.5rem;
+    }
+    
+    .envelope {
+        width: 340px;
+        height: 240px;
+    }
+    
+    .envelope-flap {
+        height: 120px;
+    }
+    
+    .letter-paper {
+        width: 300px;
+        height: 450px;
+    }
+    
+    .letter-content {
+        padding: 25px 20px;
+    }
+    
+    .personal-message {
+        font-size: 0.9rem;
+    }
+    
+    .heart-seal {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+        top: 65px;
+    }
+    
+    .photo-item {
+        width: 150px;
+        height: 112px;
+    }
+    
+    .photo-bird {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .envelope {
+        width: 300px;
+        height: 210px;
+    }
+    
+    .envelope-flap {
+        height: 105px;
+    }
+    
+    .letter-paper {
+        width: 270px;
+        height: 400px;
+    }
+    
+    .photo-item {
+        width: 130px;
+        height: 97px;
+        border: 3px solid white;
+    }
+}

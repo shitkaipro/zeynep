@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div id="confetti-container"></div>
+    <div id="heart-container"></div>
+    
+    <!-- BIRTHDAY TITLE -->
+    <div class="birthday-title">
+        <h1>Doğum günün kutlu olsun ABLAAAAA</h1>
+    </div>
+
+    <!-- BIRD ANIMATION -->
+    <div class="bird-container">
+        <div class="bird" id="mainBird">
+            <i class="fas fa-dove"></i>
+        </div>
+        <div class="envelope-container">
+            <div class="envelope" id="envelope">
+                <div class="envelope-flap"></div>
+                <div class="envelope-body">
+                    <div class="heart-seal">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                <div class="letter-paper" id="letter">
+                    <div class="letter-content">
+                        <p class="personal-message">
+                            Merhaba abla doğum günün kutlu olsun!<br><br>
+                            
+                            İnsan yaşadığı zamanın değerini, anılarını düşünmeye vakti olduğu zaman fark ediyor. Ben ise yaşadığım anda o anın değerini anlıyorum ama burada bir detay var... bu anın güzelliğini sen olduğunda anlıyorum. Kalbinin güzelliği bana bulaşıyor.<br><br>
+                            
+                            Hani insan der ya "keşke tekrar yaşasaydım, keşke etseydim"... Ben senle yaşadığım anılar için "keşke tekrar yaşasam" demiyorum. Çünkü sen benimle olduğun sürece anılarıma hep yeni bir çooooook güzel anı ekleniyor! Yani sonuuuu yooook hesssssabı!<br><br>
+                            
+                            Yeni yaşın kutlu olsun! Anılarını, Zamanını seni seven, seni yanliz birakmiyacak kişilerle geçirmen dileğiyle... <br><br>
+                            
+                            <strong style="font-size: 1.2em;">İYİİİİİİKİİİİİİ BENİMM ABLAMMSIN!</strong><br>
+                            <strong style="font-size: 1.2em;">İYİKİİİİİİ DOGDUNNNNNNNN!</strong><br><br>
+							<strong style="font-size: 1.2em;">SENİ YÜZDE BİR MİLYAR SEVİYORUMMM!</strong><br><br>
+
+                            
+                            <strong style="color: #ff6b6b; font-size: 1.1em;">SENİ HEP SEVİCEM! SENİ SEVMEDİĞİM GÜN YAŞAMADIĞIM GÜNDÜR!</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHOTO BIRDS -->
+    <div class="photo-birds">
+        <div class="photo-bird" id="bird1" data-photo="photo1">
+            <i class="fas fa-dove"></i>
+        </div>
+        <div class="photo-bird" id="bird2" data-photo="photo2">
+            <i class="fas fa-dove"></i>
+        </div>
+        <div class="photo-bird" id="bird3" data-photo="photo3">
+            <i class="fas fa-dove"></i>
+        </div>
+        <div class="photo-bird" id="bird4" data-photo="photo4">
+            <i class="fas fa-dove"></i>
+        </div>
+    </div>
+
+    <!-- PHOTOS DROP SECTION -->
+    <div class="photos-drop-container">
+        <div class="photo-item" id="photo1">
+            <img src="/images/photo1.jpg" alt="Güzel anı 1">
+        </div>
+        <div class="photo-item" id="photo2">
+            <img src="/images/photo2.jpg" alt="Güzel anı 2">
+        </div>
+        <div class="photo-item" id="photo3">
+            <img src="/images/photo3.jpg" alt="Güzel anı 3">
+        </div>
+        <div class="photo-item" id="photo4">
+            <img src="/images/photo4.jpg" alt="Güzel anı 4">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        let envelopeOpened = false;
+        
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('mainBird').classList.add('fly-in');
+                
+                setTimeout(() => {
+                    document.querySelector('.envelope-container').classList.add('drop');
+                    
+                    // Zarfa tıklama olayını ekle
+                    setTimeout(() => {
+                        const envelopeContainer = document.querySelector('.envelope-container');
+                        envelopeContainer.addEventListener('click', openEnvelope);
+                    }, 2000);
+                }, 3000);
+            }, 1000);
+        });
+
+        function openEnvelope() {
+            if (envelopeOpened) return;
+            envelopeOpened = true;
+            
+            const envelope = document.getElementById('envelope');
+            const envelopeContainer = document.querySelector('.envelope-container');
+            
+            envelope.classList.add('open');
+            envelopeContainer.style.cursor = 'default';
+            
+            setTimeout(() => {
+                document.getElementById('letter').classList.add('slide-out');
+                startContinuousConfetti();
+                startHeartRain();
+                
+                setTimeout(() => {
+                    startPhotoBirds();
+                }, 1500);
+            }, 1500);
+        }
+
+        function startContinuousConfetti() {
+            setInterval(() => {
+                confetti({
+                    particleCount: 80,
+                    spread: 100,
+                    origin: { y: 0.4 },
+                    colors: ['#ff6b9d', '#ff8fb3', '#ffa8c5', '#ffc1e3', '#ffd8e4'],
+                    ticks: 200
+                });
+            }, 3500);
+        }
+
+        function startHeartRain() {
+            setInterval(() => {
+                createHeart();
+            }, 600);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.getElementById('heart-container').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        function startPhotoBirds() {
+            const birds = [
+                { id: 'bird1', photo: 'photo1', photoPos: { bottom: '50px', left: '80px' } },
+                { id: 'bird2', photo: 'photo2', photoPos: { bottom: '50px', left: '320px' } },
+                { id: 'bird3', photo: 'photo3', photoPos: { bottom: '50px', right: '320px' } },
+                { id: 'bird4', photo: 'photo4', photoPos: { bottom: '50px', right: '80px' } }
+            ];
+            
+            birds.forEach((birdData, index) => {
+                setTimeout(() => {
+                    const bird = document.getElementById(birdData.id);
+                    const photo = document.getElementById(birdData.photo);
+                    
+                    bird.style.top = '-100px';
+                    bird.style.left = (Math.random() * 60 + 20) + '%';
+                    
+                    Object.assign(photo.style, birdData.photoPos);
+                    
+                    bird.classList.add('fly-in');
+                    
+                    setTimeout(() => {
+                        photo.classList.add('show');
+                        
+                        setTimeout(() => {
+                            bird.style.opacity = '0';
+                        }, 400);
+                    }, 2500);
+                }, index * 800);
+            });
+        }
+    </script>
+</body>
+</html>
