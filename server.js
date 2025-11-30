@@ -8,7 +8,7 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     res.render('index', {
-        title: 'ZEYNEP 20 YAŞINDA! 🎉',
+        title: 'ABLAMA',
         birthdayPerson: 'ZEYNEP',
         age: 20
     });
@@ -17,4 +17,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Zeynep'in doğum günü sitesi çalışıyor: http://localhost:${port}`);
 });
+
 
